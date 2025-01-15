@@ -4,7 +4,7 @@ import { getAll } from "../service/service"
 export const Gallery = () => {
 
     useEffect(() => {
-        getAll().then(data => console.log(data));
+        getAll().then(data => console.log(data?.data));
     }, [])
 
     return (
