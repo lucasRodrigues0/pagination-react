@@ -1,9 +1,12 @@
+import { Gallery } from "./components/Gallery"
+import { Header } from "./components/Header"
 
 function App() {
 
   return (
     <>
-      <h1 className="text-red-500">Working</h1>
+      <Header />
+      <Gallery />
     </>
   )
 }
