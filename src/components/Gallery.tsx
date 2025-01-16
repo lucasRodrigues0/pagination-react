@@ -5,6 +5,8 @@ import { Card } from "./Card";
 export const Gallery = () => {
 
     const [images, setImages] = useState<Image[]>([]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
     useEffect(() => {
         getAll().then(data => {
@@ -21,14 +23,14 @@ export const Gallery = () => {
             </div>
             <div className="flex flex-row flex-wrap justify-around px-10">
                 {
-                    images.map((image) => {
+                    images.map((image, index) => {
                         return (
                             <Card key={`image-${image._id}`}>
                                 <div className="w-full min-h-[223px] max-h-[223px]">
                                     <img src={image.url} alt="" className="" />
                                 </div>
                                 <div className="px-2 py-5 leading-7">
-                                    <h2 className="text-gray-600 text-xl">title: {image.title}</h2>
+                                    <h2 className="text-gray-600 text-xl">{index}: Title: {image.title}</h2>
                                     <p className="text-md text-gray-500">description: {image.description}</p>
                                 </div>
                             </Card>
