@@ -9,10 +9,10 @@ export const Gallery = () => {
     const [totalPages, setTotalPages] = useState<number>(0);
 
     useEffect(() => {
-        getAll().then(data => {
+        getAll(currentPage).then(data => {
             setImages(data);
         });
-    }, [])
+    }, [currentPage])
 
     return (
         <section className="flex flex-col justify-center w-full min-h-max">
@@ -31,7 +31,7 @@ export const Gallery = () => {
                                 </div>
                                 <div className="px-2 py-5 leading-7">
                                     <h2 className="text-gray-600 text-xl">{index}: Title: {image.title}</h2>
-                                    <p className="text-md text-gray-500">description: {image.description}</p>
+                                    <p className="text-md text-gray-500">Description: {image.description}</p>
                                 </div>
                             </Card>
                         )
