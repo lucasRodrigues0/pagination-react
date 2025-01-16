@@ -13,11 +13,13 @@ export const Gallery = () => {
     }, [])
 
     return (
-        <section className="flex flex-col justify-center w-full border-2 border-green-500 min-h-max">
-            <div className="container">
-                <h1 className="text-4xl text-gray-600">Image Gallery</h1>
+        <section className="flex flex-col justify-center w-full min-h-max">
+            <div className="flex justify-center">
+                <div className="container flex">
+                    <h1 className="text-4xl text-gray-600">Pagination-gallery</h1>
+                </div>
             </div>
-            <div className="flex flex-row flex-wrap justify-around border-2 border-red-500 px-10">
+            <div className="flex flex-row flex-wrap justify-around px-10">
                 {
                     images.map((image) => {
                         return (
@@ -25,8 +27,10 @@ export const Gallery = () => {
                                 <div className="w-full min-h-[223px] max-h-[223px]">
                                     <img src={image.url} alt="" className="" />
                                 </div>
-                                <h2>title: {image.title}</h2>
-                                <p>description: {image.description}</p>
+                                <div className="px-2 py-5 leading-7">
+                                    <h2 className="text-gray-600 text-xl">title: {image.title}</h2>
+                                    <p className="text-md text-gray-500">description: {image.description}</p>
+                                </div>
                             </Card>
                         )
                     })
