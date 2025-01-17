@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAll } from "../service/service"
 import { Card } from "./Card";
+import { Button } from "./Button";
 
 export const Gallery = () => {
 
@@ -13,6 +14,14 @@ export const Gallery = () => {
             setImages(data);
         });
     }, [currentPage])
+
+    const handlePrev = () => {
+        window.alert('prev')
+    }
+
+    const handleNext = () => {
+        window.alert('next')
+    }
 
     return (
         <section className="flex flex-col justify-center w-full min-h-max">
@@ -38,7 +47,16 @@ export const Gallery = () => {
                     })
                 }
             </div>
-
+            <div className="w-full border-2 border-red-500 flex justify-center h-20">
+                <div className="container border-2 border-blue-500 flex items-center justify-center gap-10">
+                    <Button onClick={handlePrev}>
+                        Prev
+                    </Button>
+                    <Button onClick={handleNext}>
+                        Next
+                    </Button>
+                </div>
+            </div>
         </section>
     )
 }
