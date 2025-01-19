@@ -16,11 +16,11 @@ export const Gallery = () => {
     }, [currentPage])
 
     const handlePrev = () => {
-        window.alert('prev')
+        setCurrentPage(currentPage - 1);
     }
 
     const handleNext = () => {
-        window.alert('next')
+        setCurrentPage(currentPage + 1);
     }
 
     return (
@@ -47,8 +47,8 @@ export const Gallery = () => {
                     })
                 }
             </div>
-            <div className="w-full border-2 border-red-500 flex justify-center h-20">
-                <div className="container border-2 border-blue-500 flex items-center justify-center gap-10">
+            <div className="w-full flex justify-center h-20">
+                <div className="container flex items-center justify-center gap-10">
                     <Button onClick={handlePrev}>
                         Prev
                     </Button>
