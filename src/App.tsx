@@ -1,14 +1,9 @@
-import { Gallery } from "./components/Gallery"
-import { Header } from "./components/Header"
+import { RouterProvider } from "react-router-dom"
+import { router } from "./router/router"
 
 function App() {
 
-  return (
-    <>
-      <Header />
-      <Gallery />
-    </>
-  )
+  return <RouterProvider router={router}/>
 }
 
 export default App
