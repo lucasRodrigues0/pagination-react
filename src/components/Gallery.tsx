@@ -11,9 +11,11 @@ export const Gallery = () => {
 
     useEffect(() => {
         getAll(currentPage).then(data => {
-            setImages(data);
+            setImages(data.results);
+            setTotalPages(data.totalPages);
         });
-    }, [currentPage])
+
+    }, [currentPage, totalPages])
 
     const handlePrev = () => {
         setCurrentPage(currentPage - 1);
@@ -49,10 +51,10 @@ export const Gallery = () => {
             </div>
             <div className="w-full flex justify-center h-20">
                 <div className="container flex items-center justify-center gap-10">
-                    <Button onClick={handlePrev}>
+                    <Button onClick={handlePrev} disabled={currentPage === 1}>
                         Prev
                     </Button>
-                    <Button onClick={handleNext}>
+                    <Button onClick={handleNext} disabled={currentPage === totalPages}>
                         Next
                     </Button>
                 </div>
