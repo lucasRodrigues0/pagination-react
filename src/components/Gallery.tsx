@@ -11,8 +11,8 @@ export const Gallery = () => {
 
     useEffect(() => {
         getAll(currentPage).then(data => {
-            setImages(data.results);
-            setTotalPages(data.totalPages);
+            setImages(data.data);
+            setTotalPages(data.pages);
         });
 
     }, [currentPage, totalPages])
@@ -33,7 +33,7 @@ export const Gallery = () => {
                 {
                     images.map((image) => {
                         return (
-                            <Card key={`image-${image._id}`}>
+                            <Card key={`image-${image.id}`}>
                                 <div className="w-full">
                                     <img src={image.url} alt="" className="" />
                                 </div>
@@ -64,5 +64,5 @@ interface Image {
     title: string,
     description: string,
     url: string,
-    _id: string
+    id: string
 }
