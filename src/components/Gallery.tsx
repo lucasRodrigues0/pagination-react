@@ -26,7 +26,7 @@ export const Gallery = () => {
     }
 
     return (
-        <section className="flex flex-col justify-center w-full min-h-max">
+        <section className="flex flex-col justify-center w-full my-14">
             <div className="flex justify-center">
             </div>
             <div className="flex flex-row flex-wrap justify-around px-10">
