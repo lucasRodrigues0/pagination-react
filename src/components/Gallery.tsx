@@ -28,9 +28,6 @@ export const Gallery = () => {
     return (
         <section className="flex flex-col justify-center w-full min-h-max">
             <div className="flex justify-center">
-                <div className="container flex">
-                    <h1 className="text-4xl text-gray-600">Pagination-gallery</h1>
-                </div>
             </div>
             <div className="flex flex-row flex-wrap justify-around px-10">
                 {
@@ -41,7 +38,7 @@ export const Gallery = () => {
                                     <img src={image.url} alt="" className="" />
                                 </div>
                                 <div className="px-2 py-5 leading-7">
-                                    <h2 className="text-gray-600 text-xl">{index}: Title: {image.title}</h2>
+                                    <h2 className="text-gray-600 text-xl">Title: {image.title}</h2>
                                     <p className="text-md text-gray-500">Description: {image.description}</p>
                                 </div>
                             </Card>
