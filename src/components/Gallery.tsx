@@ -31,10 +31,10 @@ export const Gallery = () => {
             </div>
             <div className="flex flex-row flex-wrap justify-around px-10">
                 {
-                    images.map((image, index) => {
+                    images.map((image) => {
                         return (
                             <Card key={`image-${image._id}`}>
-                                <div className="w-full min-h-[223px] max-h-[223px]">
+                                <div className="w-full">
                                     <img src={image.url} alt="" className="" />
                                 </div>
                                 <div className="px-2 py-5 leading-7">
@@ -47,7 +47,7 @@ export const Gallery = () => {
                 }
             </div>
             <div className="w-full flex justify-center h-20">
-                <div className="container flex items-center justify-center gap-10">
+                <div className="container flex items-center justify-center gap-2 lg:gap-10">
                     <Button onClick={handlePrev} disabled={currentPage === 1}>
                         Prev
                     </Button>
