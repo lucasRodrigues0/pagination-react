@@ -2,33 +2,44 @@ import { useEffect, useState } from "react"
 import { getAll } from "../service/service"
 import { Card } from "./Card";
 import { Button } from "./Button";
+import { Loader } from "./Loader";
 
 export const Gallery = () => {
 
     const [images, setImages] = useState<Image[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         getAll(currentPage).then(data => {
             setImages(data.results);
             setTotalPages(data.totalPages);
+            setIsLoading(false);
         });
 
     }, [currentPage, totalPages])
 
     const handlePrev = () => {
+        setIsLoading(true);
         setCurrentPage(currentPage - 1);
     }
 
     const handleNext = () => {
+        setIsLoading(true);
         setCurrentPage(currentPage + 1);
     }
 
-    return (
+    return isLoading ? 
+
+    (
+        <Loader />
+    )
+    
+    :
+
+    (
         <section className="flex flex-col justify-center w-full my-14">
-            <div className="flex justify-center">
-            </div>
             <div className="flex flex-row flex-wrap justify-around px-10">
                 {
                     images.map((image) => {
