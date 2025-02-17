@@ -118,7 +118,7 @@ export const Gallery = () => {
                         </Button>
                         <Button onClick={handlePrev} disabled={currentPage === 1}>
                             {
-                                '🠔'
+                                '<'
                             }
                         </Button>
                         <div className="flex md:gap-2">
@@ -128,7 +128,7 @@ export const Gallery = () => {
                         </div>
                         <Button onClick={handleNext} disabled={currentPage === totalPages}>
                             {
-                                '🠖'
+                                '>'
                             }
                         </Button>
                         <Button onClick={() => {
