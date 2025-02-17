@@ -1,13 +1,13 @@
 import { PropsWithChildren } from "react";
 
 interface props {
-    onClick: any,
+    onClick?: any,
     disabled: any
 }
 
 export const Button = ({ children, onClick, disabled }: PropsWithChildren & props) => {
 
-    const style = disabled ? "w-[150px] h-10 rounded-md text-gray-300 bg-gray-100" : "w-[150px] h-10 bg-gray-100 rounded-md text-gray-600 shadow-md lg:hover:shadow-xl transition-all"
+    const style = disabled ? "h-10 rounded-md text-gray-300 text-2xl" : "h-10 text-gray-600 font-bold text-2xl"
 
     return (
         <button className={style} onClick={onClick} disabled={disabled}>
