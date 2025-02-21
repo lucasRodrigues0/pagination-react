@@ -18,35 +18,28 @@ export const LazyGallery = () => {
         }
     }
 
-
-    // useEffect(() => {
-    //     if (isLoading && currentPage < totalPages) {
-    //         setCurrentPage((prevPage) => prevPage + 1);
-    //         console.log(currentPage);
-    //     }
-    // }, [isLoading]);
-
     useEffect(() => {
-        if (isLoading) {
-            setCurrentPage((prevPage) => (prevPage < totalPages ? prevPage + 1 : prevPage));
+        if (isLoading && currentPage < totalPages) {
+            setCurrentPage((prevPage) => prevPage + 1);
         }
-    }, [isLoading, totalPages])
+    }, [isLoading]);
 
     useEffect(() => {
-        // getAll(currentPage).then(data => {
-        //     setImages((prevData) => [...prevData, ...data.results]);
-        //     setTotalPages(data.totalPages);
-        //     setIsLoading(false);
-        // });
 
-        setTimeout(() => {
-            getAll(currentPage).then(data => {
-                setImages((prevData) => [...prevData, ...data.results]);
-                setTotalPages(data.totalPages);
-                setIsLoading(false);
-                console.log(images);
-            });
-        }, 10);
+        getAll(currentPage).then(data => {
+            setImages((prevData) => [...prevData, ...data.results]);
+            setTotalPages(data.totalPages);
+            setIsLoading(false);
+        });
+
+        // setTimeout(() => {
+        //     getAll(currentPage).then(data => {
+        //         setImages((prevData) => [...prevData, ...data.results]);
+        //         setTotalPages(data.totalPages);
+        //         setIsLoading(false);
+        //         console.log(images);
+        //     });
+        // }, 10);
     }, [currentPage]);
 
     window.addEventListener('scroll', handleScroll);
