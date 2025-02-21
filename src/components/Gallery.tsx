@@ -4,6 +4,7 @@ import { Card } from "./Card";
 import { Button } from "./Button";
 import { Loader } from "./Loader";
 import { useSearchParams } from "react-router-dom";
+import { Image } from "./Image";
 
 export const Gallery = () => {
 
@@ -80,7 +81,7 @@ export const Gallery = () => {
     return isLoading ?
 
         (
-            <Loader />
+            <Loader style="w-full h-screen flex flex-row justify-center items-center" />
         )
 
         :
@@ -144,11 +145,4 @@ export const Gallery = () => {
                 </div>
             </section>
         )
-}
-
-interface Image {
-    title: string,
-    description: string,
-    url: string,
-    _id: string
 }
