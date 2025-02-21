@@ -8,34 +8,49 @@ import { Card } from "./Card";
 export const LazyGallery = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number>(0);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [images, setImages] = useState<Image[]>([]);
-    
+
     const handleScroll = () => {
-        if(document.body.scrollHeight - 300 < window.scrollY + window.innerHeight) {
+        if (document.body.scrollHeight < window.scrollY + window.innerHeight) {
             setIsLoading(true);
         }
     }
 
+
+    // useEffect(() => {
+    //     if (isLoading && currentPage < totalPages) {
+    //         setCurrentPage((prevPage) => prevPage + 1);
+    //         console.log(currentPage);
+    //     }
+    // }, [isLoading]);
+
+    useEffect(() => {
+        if (isLoading) {
+            setCurrentPage((prevPage) => (prevPage < totalPages ? prevPage + 1 : prevPage));
+        }
+    }, [isLoading, totalPages])
+
+    useEffect(() => {
+        // getAll(currentPage).then(data => {
+        //     setImages((prevData) => [...prevData, ...data.results]);
+        //     setTotalPages(data.totalPages);
+        //     setIsLoading(false);
+        // });
+
+        setTimeout(() => {
+            getAll(currentPage).then(data => {
+                setImages((prevData) => [...prevData, ...data.results]);
+                setTotalPages(data.totalPages);
+                setIsLoading(false);
+                console.log(images);
+            });
+        }, 10);
+    }, [currentPage]);
+
     window.addEventListener('scroll', handleScroll);
 
-    useEffect(() => {
-        if(isLoading && currentPage < totalPages) {
-            setCurrentPage((prevPage) => prevPage + 1);
-            console.log(currentPage);
-        }
-    })
-
-    useEffect(() => {
-        getAll(currentPage).then(data => {
-            setImages((prevData) => [...prevData, ...data.results]);
-            setTotalPages(data.totalPages);
-            setIsLoading(false);
-        });
-    }, [currentPage]);
-    
-    
     return isLoading && images.length === 0 ?
         (
             <Loader style="w-full h-screen flex flex-row justify-center items-center" />
@@ -63,11 +78,11 @@ export const LazyGallery = () => {
                         })
                     }
                 </div>
-                { 
-                    isLoading && images.length > 0 ? <Loader /> : ''
+                {
+                    isLoading && currentPage < totalPages ? <Loader style="flex flex-row justify-center items-center mt-10" /> : ''
                 }
             </section>
         )
 
-        
+
 }
