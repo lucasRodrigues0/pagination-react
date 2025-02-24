@@ -4,45 +4,54 @@ import { getAll } from "../service/service";
 import { Image } from "./Image";
 import { Card } from "./Card";
 
-
 export const LazyGallery = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [currentPage, setCurrentPage] = useState<number>(0);
-    const [totalPages, setTotalPages] = useState<number>(0);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
     const [images, setImages] = useState<Image[]>([]);
 
-    const handleScroll = () => {
-        if (document.body.scrollHeight < window.scrollY + window.innerHeight) {
-            setIsLoading(true);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (document.body.scrollHeight < window.scrollY + window.innerHeight) {
+                setIsLoading(true);
+            }
         }
-    }
 
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+
+        let isCanceled = false;
+
+        if (isLoading) {
+            getAll(currentPage).then(data => {
+                if (!isCanceled) {
+                    setImages((prevData) => {
+                        const newData = data.results.filter((img: { _id: string; }) => !prevData.some(p => p._id === img._id));
+                        return [...prevData, ...newData];
+                    })
+                    setTotalPages(data.totalPages),
+                    setIsLoading(false);
+                }
+            });
+
+        }
+
+        return () => {
+            isCanceled = true;
+        };
+
+    }, [currentPage, isLoading, totalPages]);
+    
     useEffect(() => {
         if (isLoading && currentPage < totalPages) {
             setCurrentPage((prevPage) => prevPage + 1);
         }
-    }, [isLoading]);
-
-    useEffect(() => {
-
-        getAll(currentPage).then(data => {
-            setImages((prevData) => [...prevData, ...data.results]);
-            setTotalPages(data.totalPages);
-            setIsLoading(false);
-        });
-
-        // setTimeout(() => {
-        //     getAll(currentPage).then(data => {
-        //         setImages((prevData) => [...prevData, ...data.results]);
-        //         setTotalPages(data.totalPages);
-        //         setIsLoading(false);
-        //         console.log(images);
-        //     });
-        // }, 10);
-    }, [currentPage]);
-
-    window.addEventListener('scroll', handleScroll);
+    }, [isLoading, totalPages]);
 
     return isLoading && images.length === 0 ?
         (
