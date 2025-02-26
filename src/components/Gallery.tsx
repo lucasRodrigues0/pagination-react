@@ -21,6 +21,8 @@ export const Gallery = () => {
             setIsLoading(false);
         });
 
+        window.scrollTo(0, 0);
+
     }, [currentPage, totalPages])
 
     const handlePrev = () => {
